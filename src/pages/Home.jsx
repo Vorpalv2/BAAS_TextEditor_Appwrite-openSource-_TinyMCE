@@ -9,6 +9,7 @@ function Home() {
     databaseConfig.getAllPost().then((posts) => {
       if (posts) {
         setPosts(posts.documents);
+        console.log(posts);
       }
     });
   }, []);

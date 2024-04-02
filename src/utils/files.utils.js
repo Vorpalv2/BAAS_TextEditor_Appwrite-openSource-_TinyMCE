@@ -36,7 +36,11 @@ class FileService {
   }
 
   async getFilePreview(fileId) {
-    return this.storage.getFilePreview(config.appwriteUrlBucketId, fileId);
+    const file = await this.storage.getFilePreview(
+      config.appwriteUrlBucketId,
+      fileId
+    );
+    return file;
   }
 }
 

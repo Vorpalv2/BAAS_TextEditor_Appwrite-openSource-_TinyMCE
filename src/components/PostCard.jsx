@@ -1,17 +1,22 @@
 /*eslint-disable */
 import { Link } from "react-router-dom";
 import fileService from "../utils/files.utils";
+import { useState, useEffect } from "react";
 
 function PostCard({ $id, title, featuredImage }) {
+  const [image, setImage] = useState("");
+
+  useEffect(() => {
+    fileService
+      .getFilePreview(featuredImage)
+      .then((response) => setImage(response.href));
+  }, []);
+
   return (
     <Link to={`/post/${$id}`}>
       <div className="w-full bg-gray-100 rounded-xl p-4">
         <div className="w-full justify-center mb-4">
-          <img
-            src={fileService.getFilePreview(featuredImage)}
-            alt={title}
-            className="rounded-xl"
-          />
+          <img src={image} alt={title} className="rounded-xl" />
         </div>
         <h2 className="text-xl font-bold">{title}</h2>
       </div>

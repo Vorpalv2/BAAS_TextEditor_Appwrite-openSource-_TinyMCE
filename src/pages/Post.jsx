@@ -8,6 +8,7 @@ import fileService from "../utils/files.utils";
 
 export default function Post() {
   const [post, setPost] = useState(null);
+  const [image, setImage] = useState("");
   const { slug } = useParams();
   const navigate = useNavigate();
 
@@ -33,12 +34,24 @@ export default function Post() {
     });
   };
 
+  useEffect(() => {
+    if (post !== null) {
+      console.log("hello");
+      console.log(post.featuredImage);
+      fileService
+        .getFilePreview(post.featuredImage)
+        .then((response) => setImage(response.href));
+      console.log(image);
+    }
+  }, [post, image]);
+
   return post ? (
     <div className="py-8">
       <Container>
         <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
           <img
-            src={fileService.getFilePreview(post.featuredImage)}
+            src={image}
+            onClick={() => console.log(post.title)}
             alt={post.title}
             className="rounded-xl"
           />
