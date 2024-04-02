@@ -46,7 +46,7 @@ export default function PostForm({ post }) {
         data.featuredImage = fileId;
         const dbPost = await databaseConfig.createPost({
           ...data,
-          userID: userData.$id,
+          userID: userData.userData.$id,
         });
 
         if (dbPost) {
