@@ -11,7 +11,7 @@ const authSlice = createSlice({
   reducers: {
     login(state, action) {
       try {
-        (state.status = true), (state.userData = action.payload.userData);
+        (state.status = true), (state.userData = action.payload);
       } catch (error) {
         console.log(error);
       }

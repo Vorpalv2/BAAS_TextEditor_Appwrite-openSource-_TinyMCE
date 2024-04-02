@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { Logo, Input, Button } from "./index";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import authService from "../utils/auth.utils";
 
 import { login as AuthLogin } from "../store/authslice.store";
@@ -13,6 +13,11 @@ const Login = () => {
   const dispatch = useDispatch();
   const [error, setError] = useState("");
 
+  console.log(
+    "Redux Check : ",
+    useSelector((state) => state.auth)
+  );
+
   async function changeSignIn(data) {
     setError("");
     try {
@@ -20,6 +25,7 @@ const Login = () => {
 
       if (userData) {
         const currentUser = await authService.getCurrentUser();
+        console.log("Current User :", currentUser);
         dispatch(AuthLogin(currentUser));
         navigate("/");
       }

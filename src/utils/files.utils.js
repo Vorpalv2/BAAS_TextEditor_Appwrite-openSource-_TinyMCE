@@ -14,7 +14,7 @@ class FileService {
 
   async uploadFile(file) {
     try {
-      await this.storage.createFile(
+      return await this.storage.createFile(
         config.appwriteUrlBucketId,
         ID.unique(),
         file
